@@ -1,19 +1,19 @@
 <template>
   <div>
-      <h2></h2>
-      <div v-if="MORE_MOVIES && MORE_MOVIES.length > 0">
+      <!-- <div class="m-list" v-if="MORE_MOVIES && MORE_MOVIES.length > 0"> -->
+        <h2>{{MORE_MOVIES.title}}</h2>      
           <ul>
                <li is="movie-item" v-for="item in MORE_MOVIES.subjects" :key="item.id" :item="item"> </li>
-          </ul>
-      </div>
-      <div v-else>
+          </ul>      
+      <!-- </div>      -->
+      <!-- <div v-else>
           <loading></loading>
-      </div>
+      </div> -->
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapState } from 'vuex'
 import MovieItem from './module/MovieItem'
 import Loading from './common/Loading'
 export default {
@@ -47,9 +47,11 @@ export default {
                 type = 'top250'
              break
         }
-        console.log('type:' + title);
+        console.log('type:' + title); 
 
-        if(!!this.MORE_MOVIES && this.MORE_MOVIES.length > 0){}else{
+        if(!!this.MORE_MOVIES && this.MORE_MOVIES.length > 0){
+             console.log('MORE_MOVIES:' + this.MORE_MOVIES);
+        }else{
             this.$store.dispatch({
             type: 'MORE_MOVIES',            
             title: type,
