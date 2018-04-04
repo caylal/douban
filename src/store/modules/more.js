@@ -4,7 +4,7 @@ import axios from 'axios'
 const HOST = 'http://localhost:7000'
 
 const state = {
-   movies: {}   
+   movies: []   
 }
 
 const getters = {
@@ -14,8 +14,8 @@ const getters = {
 }
 const mutations = {
     [types.MORE_MOVIES](state, payload){
-        console.log('payload.data:' + payload.res)
-       state.movies = payload.res;
+        console.log('payload.data:' + payload)
+       state.movies = payload;
     }
 }
 
@@ -26,10 +26,7 @@ const actions = {
        axios.get(HOST + `/movie/${payload.title}?start =${payload.start}&count=${payload.count}`)
              .then(res =>{              
                 console.log('moreMovies:' + res.data);
-               commit({
-                   type: types.MORE_MOVIES,                   
-                   res: res.data
-               })
+               commit(types.MORE_MOVIES, res.data)
              }).catch(err => console.log(err))
 
         // switch(payload.title){
