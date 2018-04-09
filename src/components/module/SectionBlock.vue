@@ -1,16 +1,16 @@
 <template>
   <div class="section-box">
-      <div class="m-header">
+      <div class="m-header" v-if="title">
         <h2>{{title}}</h2>
         <span class="more">
            <router-link :to="{name:'more-list', params:{type:type}}">更多</router-link>
         </span>
       </div>
       <div class="m-content">
-          <ul class="m-ul">
-            <li is="movie-item" v-for="item in items" :key="item.id" :item="item">              
-            </li>
-          </ul>
+          <!-- <ul class="m-ul">
+            <li is="movie-item" v-for="item in items" :key="item.id" :item="item"></li>
+          </ul> -->
+          <movie-item :subject="items" :film="tag"></movie-item>
       </div>
   </div>
 </template>
@@ -20,7 +20,7 @@
 import MovieItem from './MovieItem'
 export default {
   name:'sectionbox',
-  props:['title', 'type', 'items'],
+  props:['title', 'type', 'items','tag'],
   components:{  
     MovieItem
   },
@@ -50,13 +50,13 @@ export default {
 .m-content{
   box-sizing: content-box;  
 }
-.m-ul{ 
+.m-content ul{ 
   font-size: 0;
   overflow-x: auto;
   white-space:nowrap; 
  
 }
-.m-ul li{
+.m-content  li{
   display: inline-block;
  
   width: 7rem;
@@ -79,6 +79,22 @@ export default {
   white-space: nowrap;
   word-wrap: normal;
    
+}
+.f-title{
+  display: block;
+  line-height: 1rem;
+  font-size: .8rem;
+  margin-top: .5rem;
+  color: black;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  word-wrap: normal;
+}
+.f-color{
+  color: #494949;
+  font-size: .6rem;
+  margin-top: .3rem;
 }
 .average{
   color: #aaa;
